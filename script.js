@@ -1,4 +1,4 @@
-// Mobile Navigation Toggle
+﻿// Mobile Navigation Toggle
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
@@ -29,17 +29,24 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Navbar background change on scroll
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 100) {
-        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-        navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
-    } else {
-        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-        navbar.style.boxShadow = 'none';
+// Navbar background change on scroll - throttled for performance
+let ticking = false;
+window.addEventListener("scroll", () => {
+    if (!ticking) {
+        requestAnimationFrame(() => {
+            const navbar = document.querySelector(".navbar");
+            if (window.scrollY > 100) {
+                navbar.style.background = "rgba(0, 0, 0, 0.95)";
+                navbar.style.boxShadow = "0 2px 20px rgba(0,0,0,0.3)";
+            } else {
+                navbar.style.background = "rgba(0, 0, 0, 0.8)";
+                navbar.style.boxShadow = "none";
+            }
+            ticking = false;
+        });
+        ticking = true;
     }
-});
+}, { passive: true });
 
 // Intersection Observer for animations
 const observerOptions = {
@@ -305,16 +312,16 @@ function updateNavigationGlow(mood) {
 // Show personalized welcome message
 function showWelcomeMessage(mood) {
     const messages = {
-        excited: "🚀 Amazing! Your excitement is contagious. Let's explore the universe together!",
-        curious: "🔍 Perfect! Your curiosity will unlock incredible discoveries here.",
-        focused: "🎯 Excellent! Your focus will help you absorb every detail of this journey.",
-        creative: "🎨 Wonderful! Your creativity will see possibilities others might miss.",
-        peaceful: "🧘 Beautiful! Your peaceful energy creates the perfect space for learning.",
-        adventurous: "🌍 Fantastic! Your adventurous spirit is exactly what this exploration needs.",
-        nostalgic: "💭 Lovely! Your reflective nature will find deep meaning in this experience.",
-        ambitious: "💪 Outstanding! Your ambition will drive you to achieve great things here.",
-        contemplative: "🤔 Perfect! Your thoughtful approach will uncover profound insights.",
-        energetic: "⚡ Incredible! Your energy will power through every section with enthusiasm!"
+        excited: "ðŸš€ Amazing! Your excitement is contagious. Let's explore the universe together!",
+        curious: "ðŸ” Perfect! Your curiosity will unlock incredible discoveries here.",
+        focused: "ðŸŽ¯ Excellent! Your focus will help you absorb every detail of this journey.",
+        creative: "ðŸŽ¨ Wonderful! Your creativity will see possibilities others might miss.",
+        peaceful: "ðŸ§˜ Beautiful! Your peaceful energy creates the perfect space for learning.",
+        adventurous: "ðŸŒ Fantastic! Your adventurous spirit is exactly what this exploration needs.",
+        nostalgic: "ðŸ’­ Lovely! Your reflective nature will find deep meaning in this experience.",
+        ambitious: "ðŸ’ª Outstanding! Your ambition will drive you to achieve great things here.",
+        contemplative: "ðŸ¤” Perfect! Your thoughtful approach will uncover profound insights.",
+        energetic: "âš¡ Incredible! Your energy will power through every section with enthusiasm!"
     };
     
     // Create and show welcome toast
@@ -335,7 +342,7 @@ function showWelcomeMessage(mood) {
 }
 
 // BULLETPROOF COSMIC AUDIO SYSTEM
-console.log('🚀 LOADING COSMIC AUDIO SYSTEM...');
+console.log('ðŸš€ LOADING COSMIC AUDIO SYSTEM...');
 
 // Global variables to prevent conflicts
 window.cosmicAudio = {
@@ -346,14 +353,14 @@ window.cosmicAudio = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🎵 Initializing Cosmic Audio...');
+    console.log('ðŸŽµ Initializing Cosmic Audio...');
     
     // Get elements
     const audioToggle = document.getElementById('audioToggle');
     const playlistToggle = document.getElementById('playlistToggle');
     const musicPlaylist = document.getElementById('musicPlaylist');
     
-    console.log('🔍 Elements found:', {
+    console.log('ðŸ” Elements found:', {
         audioToggle: !!audioToggle,
         playlistToggle: !!playlistToggle,
         musicPlaylist: !!musicPlaylist
@@ -362,7 +369,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cosmic soundscapes
     const cosmicTracks = {
         'deep-space': {
-            name: '🌌 Deep Space Humming',
+            name: 'ðŸŒŒ Deep Space Humming',
             create: function(ctx) {
                 const sources = [];
                 
@@ -393,7 +400,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         
         'cosmic-winds': {
-            name: '💨 Cosmic Winds',
+            name: 'ðŸ’¨ Cosmic Winds',
             create: function(ctx) {
                 const sources = [];
                 
@@ -427,7 +434,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         
         'stellar-harmony': {
-            name: '⭐ Stellar Harmony',
+            name: 'â­ Stellar Harmony',
             create: function(ctx) {
                 const sources = [];
                 const frequencies = [220, 330, 440, 550];
@@ -451,7 +458,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         
         'nebula-dreams': {
-            name: '🌠 Nebula Dreams',
+            name: 'ðŸŒ  Nebula Dreams',
             create: function(ctx) {
                 const sources = [];
                 
@@ -484,7 +491,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         
         'quantum-pulse': {
-            name: '⚛️ Quantum Pulse',
+            name: 'âš›ï¸ Quantum Pulse',
             create: function(ctx) {
                 const sources = [];
                 
@@ -509,7 +516,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function initAudioContext() {
         if (!window.cosmicAudio.audioContext) {
             window.cosmicAudio.audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            console.log('🎼 Audio context created');
+            console.log('ðŸŽ¼ Audio context created');
         }
         return window.cosmicAudio.audioContext;
     }
@@ -526,7 +533,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function playTrack(trackId) {
-        console.log(`🎵 Playing: ${trackId}`);
+        console.log(`ðŸŽµ Playing: ${trackId}`);
         
         try {
             stopAllSources();
@@ -541,7 +548,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 startTrack(trackId, ctx);
             }
         } catch (error) {
-            console.error('❌ Play error:', error);
+            console.error('âŒ Play error:', error);
             alert('Audio error: ' + error.message);
         }
     }
@@ -552,7 +559,7 @@ document.addEventListener('DOMContentLoaded', () => {
             window.cosmicAudio.currentTrack = trackId;
             window.cosmicAudio.isPlaying = true;
             updateUI();
-            console.log(`✅ Playing: ${cosmicTracks[trackId].name}`);
+            console.log(`âœ… Playing: ${cosmicTracks[trackId].name}`);
         }
     }
     
@@ -560,7 +567,7 @@ document.addEventListener('DOMContentLoaded', () => {
         stopAllSources();
         window.cosmicAudio.isPlaying = false;
         updateUI();
-        console.log('⏹️ Audio stopped');
+        console.log('â¹ï¸ Audio stopped');
     }
     
     function updateUI() {
@@ -581,9 +588,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Button handlers
     if (audioToggle) {
-        console.log('✅ Setting up audio button');
+        console.log('âœ… Setting up audio button');
         audioToggle.addEventListener('click', () => {
-            console.log('🎵 Button clicked, isPlaying:', window.cosmicAudio.isPlaying);
+            console.log('ðŸŽµ Button clicked, isPlaying:', window.cosmicAudio.isPlaying);
             if (window.cosmicAudio.isPlaying) {
                 stopAudio();
             } else {
@@ -592,7 +599,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         updateUI();
     } else {
-        console.error('❌ Audio button not found');
+        console.error('âŒ Audio button not found');
     }
     
     // Playlist functionality
@@ -612,7 +619,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.track-item').forEach(trackElement => {
         trackElement.addEventListener('click', () => {
             const trackId = trackElement.dataset.track;
-            console.log(`🎶 Track selected: ${trackId}`);
+            console.log(`ðŸŽ¶ Track selected: ${trackId}`);
             
             if (trackId && cosmicTracks[trackId]) {
                 window.cosmicAudio.currentTrack = trackId;
@@ -635,7 +642,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Test functions
     window.testAudio = () => {
-        console.log('🧪 Testing audio...');
+        console.log('ðŸ§ª Testing audio...');
         if (window.cosmicAudio.isPlaying) {
             stopAudio();
         } else {
@@ -644,7 +651,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     
     window.testBeep = () => {
-        console.log('🔔 Testing beep...');
+        console.log('ðŸ”” Testing beep...');
         try {
             const ctx = initAudioContext();
             if (ctx.state === 'suspended') ctx.resume();
@@ -662,15 +669,15 @@ document.addEventListener('DOMContentLoaded', () => {
             osc.start();
             osc.stop(ctx.currentTime + 0.5);
             
-            console.log('✅ Beep played');
+            console.log('âœ… Beep played');
         } catch (error) {
-            console.error('❌ Beep failed:', error);
+            console.error('âŒ Beep failed:', error);
         }
     };
     
-    console.log('🎵 COSMIC AUDIO SYSTEM READY!');
-    console.log('🧪 Test functions: testAudio(), testBeep()');
-    console.log('🎛️ Click speaker button to start!');
+    console.log('ðŸŽµ COSMIC AUDIO SYSTEM READY!');
+    console.log('ðŸ§ª Test functions: testAudio(), testBeep()');
+    console.log('ðŸŽ›ï¸ Click speaker button to start!');
 });
 
 // Enhanced Black Hole Interactions
@@ -1206,15 +1213,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (retroAdButton.style.display !== 'none') {
                 const adTexts = [
                     'You share your BDay with',
-                    '🎂 Who shares your BDay?',
-                    '🎉 Your Birthday Buddies',
-                    '🎁 Same Birthday as You!',
-                    '✨ Birthday Twins!',
-                    '🎊 Your BDay Match!',
-                    '🔥 Birthday Connection!',
-                    '💥 Same Date Born!',
-                    '⭐ Birthday Stars!',
-                    '💎 Birthday Gems!'
+                    'ðŸŽ‚ Who shares your BDay?',
+                    'ðŸŽ‰ Your Birthday Buddies',
+                    'ðŸŽ Same Birthday as You!',
+                    'âœ¨ Birthday Twins!',
+                    'ðŸŽŠ Your BDay Match!',
+                    'ðŸ”¥ Birthday Connection!',
+                    'ðŸ’¥ Same Date Born!',
+                    'â­ Birthday Stars!',
+                    'ðŸ’Ž Birthday Gems!'
                 ];
                 const subTexts = [
                     'Click to find out!',
@@ -1345,7 +1352,7 @@ document.head.appendChild(confettiStyle);
 (function() {
     'use strict';
     
-    console.log('🚀 LOADING STANDALONE COSMIC AUDIO...');
+    console.log('ðŸš€ LOADING STANDALONE COSMIC AUDIO...');
     
     // Completely isolated audio system
     const COSMIC_AUDIO = {
@@ -1358,7 +1365,7 @@ document.head.appendChild(confettiStyle);
         initContext: function() {
             if (!this.audioContext) {
                 this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                console.log('🎼 Audio context created');
+                console.log('ðŸŽ¼ Audio context created');
             }
             return this.audioContext;
         },
@@ -1506,16 +1513,16 @@ document.head.appendChild(confettiStyle);
         
         // Track definitions
         tracks: {
-            'deep-space': { name: '🌌 Deep Space Humming', create: 'createDeepSpace' },
-            'cosmic-winds': { name: '💨 Cosmic Winds', create: 'createCosmicWinds' },
-            'stellar-harmony': { name: '⭐ Stellar Harmony', create: 'createStellarHarmony' },
-            'nebula-dreams': { name: '🌠 Nebula Dreams', create: 'createNebulaDreams' },
-            'quantum-pulse': { name: '⚛️ Quantum Pulse', create: 'createQuantumPulse' }
+            'deep-space': { name: 'ðŸŒŒ Deep Space Humming', create: 'createDeepSpace' },
+            'cosmic-winds': { name: 'ðŸ’¨ Cosmic Winds', create: 'createCosmicWinds' },
+            'stellar-harmony': { name: 'â­ Stellar Harmony', create: 'createStellarHarmony' },
+            'nebula-dreams': { name: 'ðŸŒ  Nebula Dreams', create: 'createNebulaDreams' },
+            'quantum-pulse': { name: 'âš›ï¸ Quantum Pulse', create: 'createQuantumPulse' }
         },
         
         // Play a track
         play: function(trackId) {
-            console.log(`🎵 Playing: ${trackId}`);
+            console.log(`ðŸŽµ Playing: ${trackId}`);
             
             try {
                 this.stopAll();
@@ -1530,7 +1537,7 @@ document.head.appendChild(confettiStyle);
                     this.startTrack(trackId, ctx);
                 }
             } catch (error) {
-                console.error('❌ Play error:', error);
+                console.error('âŒ Play error:', error);
                 alert('Audio error: ' + error.message);
             }
         },
@@ -1543,7 +1550,7 @@ document.head.appendChild(confettiStyle);
                 this.currentTrack = trackId;
                 this.isPlaying = true;
                 this.updateUI();
-                console.log(`✅ Playing: ${track.name}`);
+                console.log(`âœ… Playing: ${track.name}`);
             }
         },
         
@@ -1552,7 +1559,7 @@ document.head.appendChild(confettiStyle);
             this.stopAll();
             this.isPlaying = false;
             this.updateUI();
-            console.log('⏹️ Audio stopped');
+            console.log('â¹ï¸ Audio stopped');
         },
         
         // Update UI
@@ -1576,14 +1583,14 @@ document.head.appendChild(confettiStyle);
     
     // Initialize when DOM is ready
     function initCosmicAudio() {
-        console.log('🎵 Initializing Cosmic Audio System...');
+        console.log('ðŸŽµ Initializing Cosmic Audio System...');
         
         // Main audio button
         const audioToggle = document.getElementById('audioToggle');
         if (audioToggle) {
-            console.log('✅ Audio button found');
+            console.log('âœ… Audio button found');
             audioToggle.addEventListener('click', () => {
-                console.log('🎵 Button clicked, isPlaying:', COSMIC_AUDIO.isPlaying);
+                console.log('ðŸŽµ Button clicked, isPlaying:', COSMIC_AUDIO.isPlaying);
                 if (COSMIC_AUDIO.isPlaying) {
                     COSMIC_AUDIO.stop();
                 } else {
@@ -1592,7 +1599,7 @@ document.head.appendChild(confettiStyle);
             });
             COSMIC_AUDIO.updateUI();
         } else {
-            console.error('❌ Audio button not found');
+            console.error('âŒ Audio button not found');
         }
         
         // Playlist functionality
@@ -1615,7 +1622,7 @@ document.head.appendChild(confettiStyle);
         document.querySelectorAll('.track-item').forEach(trackElement => {
             trackElement.addEventListener('click', () => {
                 const trackId = trackElement.dataset.track;
-                console.log(`🎶 Track selected: ${trackId}`);
+                console.log(`ðŸŽ¶ Track selected: ${trackId}`);
                 
                 if (trackId && COSMIC_AUDIO.tracks[trackId]) {
                     COSMIC_AUDIO.currentTrack = trackId;
@@ -1636,13 +1643,13 @@ document.head.appendChild(confettiStyle);
             });
         });
         
-        console.log('🎵 COSMIC AUDIO SYSTEM READY!');
-        console.log('🎛️ Click the speaker button to start!');
+        console.log('ðŸŽµ COSMIC AUDIO SYSTEM READY!');
+        console.log('ðŸŽ›ï¸ Click the speaker button to start!');
     }
     
     // Global test functions
     window.testCosmicAudio = function() {
-        console.log('🧪 Testing cosmic audio...');
+        console.log('ðŸ§ª Testing cosmic audio...');
         if (COSMIC_AUDIO.isPlaying) {
             COSMIC_AUDIO.stop();
         } else {
@@ -1651,7 +1658,7 @@ document.head.appendChild(confettiStyle);
     };
     
     window.testBeep = function() {
-        console.log('🔔 Testing beep...');
+        console.log('ðŸ”” Testing beep...');
         try {
             const ctx = COSMIC_AUDIO.initContext();
             if (ctx.state === 'suspended') ctx.resume();
@@ -1669,9 +1676,9 @@ document.head.appendChild(confettiStyle);
             osc.start();
             osc.stop(ctx.currentTime + 0.5);
             
-            console.log('✅ Beep played');
+            console.log('âœ… Beep played');
         } catch (error) {
-            console.error('❌ Beep failed:', error);
+            console.error('âŒ Beep failed:', error);
         }
     };
     

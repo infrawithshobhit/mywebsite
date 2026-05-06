@@ -159,308 +159,61 @@ if (!document.querySelector('.cosmic-scene')) {
     document.body.insertBefore(cosmicScene, document.body.firstChild);
 }
 
-// EMERGENCY BYPASS - Skip mood popup entirely
+// CLEAN WEBSITE ENTRY - No mood popup needed
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('=== EMERGENCY BYPASS ACTIVATED ===');
+    console.log('=== INITIALIZING WEBSITE ===');
     
+    // Completely remove mood popup
     const moodPopup = document.getElementById('moodPopup');
+    if (moodPopup) {
+        moodPopup.remove();
+        console.log('=== MOOD POPUP REMOVED ===');
+    }
     
-    // IMMEDIATE BYPASS - Hide popup and enter website
+    // Set default theme and make website immediately accessible
+    const defaultMood = 'excited';
+    sessionStorage.setItem('userMood', defaultMood);
+    applyTheme(defaultMood);
+    
+    // Make website visible immediately
+    document.body.style.opacity = '1';
+    document.body.style.transition = 'opacity 0.5s ease';
+    
+    // Ensure cosmic scene is visible
+    const cosmicScene = document.querySelector('.cosmic-scene');
+    if (cosmicScene) {
+        cosmicScene.style.display = 'block';
+        cosmicScene.style.visibility = 'visible';
+        cosmicScene.style.opacity = '1';
+        cosmicScene.style.zIndex = '-1';
+        console.log('=== COSMIC SCENE VISIBLE ===');
+    }
+    
+    // Ensure all cosmic elements are visible
+    const cosmicElements = [
+        '.solar-system',
+        '.wormhole', 
+        '.blackhole-system',
+        '.blackhole-center',
+        '.accretion-disk',
+        '.event-horizon'
+    ];
+    
+    cosmicElements.forEach(selector => {
+        const element = document.querySelector(selector);
+        if (element) {
+            element.style.display = 'block';
+            element.style.visibility = 'visible';
+            element.style.opacity = '1';
+        }
+    });
+    
+    // Show welcome message
     setTimeout(() => {
-        console.log('=== BYPASSING MOOD POPUP COMPLETELY ===');
-        
-        if (moodPopup) {
-            moodPopup.style.display = 'none';
-            moodPopup.classList.add('hidden');
-        }
-        
-        // Set default mood and enter website
-        const defaultMood = 'excited';
-        sessionStorage.setItem('userMood', defaultMood);
-        applyTheme(defaultMood);
-        document.body.style.opacity = '1';
-        
-        // FORCE COSMIC SCENE VISIBILITY
-        const cosmicScene = document.querySelector('.cosmic-scene');
-        if (cosmicScene) {
-            cosmicScene.style.display = 'block';
-            cosmicScene.style.visibility = 'visible';
-            cosmicScene.style.opacity = '1';
-            cosmicScene.style.zIndex = '-1';
-            console.log('=== COSMIC SCENE FORCED VISIBLE ===');
-        }
-        
-        // Force all cosmic elements
-        const solarSystem = document.querySelector('.solar-system');
-        const wormhole = document.querySelector('.wormhole');
-        const blackholeSystem = document.querySelector('.blackhole-system');
-        
-        [solarSystem, wormhole, blackholeSystem].forEach(element => {
-            if (element) {
-                element.style.display = 'block';
-                element.style.visibility = 'visible';
-                element.style.opacity = '1';
-            }
-        });
-        
-        // FORCE START AUDIO
-        setTimeout(() => {
-            const audioBtn = document.getElementById('audioToggle');
-            if (audioBtn) {
-                audioBtn.click(); // Auto-start audio
-                console.log('=== AUDIO AUTO-STARTED ===');
-            }
-        }, 2000);
-        
-        // Show welcome message
         showWelcomeMessage(defaultMood);
-        
-        console.log('=== WEBSITE ENTERED SUCCESSFULLY ===');
     }, 1000);
     
-    // BACKUP: Also hide popup immediately
-    if (moodPopup) {
-        moodPopup.style.display = 'none';
-    }
-    
-    // BACKUP: Set body opacity immediately
-    document.body.style.opacity = '1';
-    
-    // BACKUP: Force black hole visible immediately
-    const blackhole = document.querySelector('.blackhole-background');
-    if (blackhole) {
-        blackhole.style.display = 'block';
-        blackhole.style.visibility = 'visible';
-        blackhole.style.opacity = '1';
-    }
-    
-    // Check if user has already selected a mood in this session
-    const savedMood = sessionStorage.getItem('userMood');
-    if (savedMood) {
-        applyTheme(savedMood);
-        if (moodPopup) moodPopup.classList.add('hidden');
-        document.body.style.opacity = '1';
-    } else {
-        document.body.style.opacity = '1';
-    }
-    
-    // Enable enter button when mood is selected
-    if (moodSelect && enterButton) {
-        // Function to update button state
-        function updateButtonState() {
-            const selectedValue = moodSelect.value;
-            const hasValue = selectedValue && selectedValue.trim() !== '';
-            
-            console.log('Updating button state. Selected value:', selectedValue, 'Has value:', hasValue);
-            
-            if (hasValue) {
-                // Enable button - aggressive approach
-                enterButton.disabled = false;
-                enterButton.removeAttribute('disabled');
-                enterButton.classList.remove('disabled');
-                enterButton.classList.add('enabled');
-                
-                // Force styles
-                enterButton.style.background = 'linear-gradient(45deg, #ff8c00, #ffa500)';
-                enterButton.style.opacity = '1';
-                enterButton.style.cursor = 'pointer';
-                enterButton.style.pointerEvents = 'auto';
-                
-                console.log('Button enabled - final state:', {
-                    disabled: enterButton.disabled,
-                    hasDisabledAttr: enterButton.hasAttribute('disabled'),
-                    classList: enterButton.classList.toString(),
-                    style: enterButton.style.cssText
-                });
-            } else {
-                // Disable button
-                enterButton.disabled = true;
-                enterButton.setAttribute('disabled', 'disabled');
-                enterButton.classList.add('disabled');
-                enterButton.classList.remove('enabled');
-                
-                // Force disabled styles
-                enterButton.style.background = '#666666';
-                enterButton.style.opacity = '0.5';
-                enterButton.style.cursor = 'not-allowed';
-                enterButton.style.pointerEvents = 'none';
-                
-                console.log('Button disabled');
-            }
-        }
-        
-        // Listen for change events
-        moodSelect.addEventListener('change', (e) => {
-            console.log('Change event fired:', e.target.value);
-            setTimeout(updateButtonState, 50);
-        });
-        
-        // Listen for input events
-        moodSelect.addEventListener('input', (e) => {
-            console.log('Input event fired:', e.target.value);
-            setTimeout(updateButtonState, 50);
-        });
-        
-        // Listen for click events on select (for mobile)
-        moodSelect.addEventListener('click', () => {
-            setTimeout(updateButtonState, 200);
-        });
-        
-        // Listen for focus events
-        moodSelect.addEventListener('focus', () => {
-            setTimeout(updateButtonState, 100);
-        });
-        
-        // Listen for blur events
-        moodSelect.addEventListener('blur', () => {
-            setTimeout(updateButtonState, 100);
-        });
-        
-        // Initial state check
-        setTimeout(updateButtonState, 100);
-        
-        // Backup check every second for 10 seconds
-        let checkCount = 0;
-        const backupCheck = setInterval(() => {
-            checkCount++;
-            if (checkCount > 10) {
-                clearInterval(backupCheck);
-                return;
-            }
-            
-            if (moodSelect.value && moodSelect.value.trim() !== '' && enterButton.disabled) {
-                console.log('Backup check triggered - forcing button enable');
-                updateButtonState();
-            }
-        }, 1000);
-    }
-    
-    // Add emergency bypass after 5 seconds if button still doesn't work
-    setTimeout(() => {
-        if (moodSelect && moodSelect.value && moodSelect.value.trim() !== '' && enterButton && enterButton.disabled) {
-            console.log('Emergency bypass activated - creating alternative entry method');
-            
-            // Create bypass button
-            const bypassButton = document.createElement('button');
-            bypassButton.innerHTML = '🚀 Emergency Entry (Click Here)';
-            bypassButton.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                z-index: 10001;
-                padding: 1rem 2rem;
-                font-size: 1.2rem;
-                font-weight: 600;
-                border: 3px solid #ff8c00;
-                border-radius: 50px;
-                background: linear-gradient(45deg, #ff8c00, #ffa500);
-                color: white;
-                cursor: pointer;
-                animation: pulse 1s infinite;
-            `;
-            
-            bypassButton.addEventListener('click', () => {
-                const selectedMood = moodSelect.value;
-                if (selectedMood && selectedMood.trim() !== '') {
-                    sessionStorage.setItem('userMood', selectedMood);
-                    applyTheme(selectedMood);
-                    if (moodPopup) {
-                        moodPopup.style.animation = 'fadeOut 0.8s ease';
-                        setTimeout(() => {
-                            moodPopup.classList.add('hidden');
-                        }, 800);
-                    }
-                    showWelcomeMessage(selectedMood);
-                    bypassButton.remove();
-                }
-            });
-            
-            document.body.appendChild(bypassButton);
-            
-            // Add pulse animation
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes pulse {
-                    0% { transform: translate(-50%, -50%) scale(1); }
-                    50% { transform: translate(-50%, -50%) scale(1.05); }
-                    100% { transform: translate(-50%, -50%) scale(1); }
-                }
-            `;
-            document.head.appendChild(style);
-        }
-    }, 5000);
-
-    // MULTIPLE BYPASS OPTIONS
-    
-    // 1. Click anywhere on popup background to enter
-    if (moodPopup) {
-        moodPopup.addEventListener('click', (e) => {
-            if (e.target === moodPopup) {
-                console.log('=== POPUP BACKGROUND CLICKED - BYPASSING ===');
-                const defaultMood = 'excited';
-                sessionStorage.setItem('userMood', defaultMood);
-                applyTheme(defaultMood);
-                moodPopup.classList.add('hidden');
-                showWelcomeMessage(defaultMood);
-            }
-        });
-    }
-    
-    // 2. Press ENTER key to bypass
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && moodPopup && !moodPopup.classList.contains('hidden')) {
-            console.log('=== ENTER KEY PRESSED - BYPASSING ===');
-            const selectedMood = moodSelect ? moodSelect.value || 'excited' : 'excited';
-            sessionStorage.setItem('userMood', selectedMood);
-            applyTheme(selectedMood);
-            moodPopup.classList.add('hidden');
-            showWelcomeMessage(selectedMood);
-        }
-    });
-    
-    // 3. Press SPACE key to bypass
-    document.addEventListener('keydown', (e) => {
-        if (e.key === ' ' && moodPopup && !moodPopup.classList.contains('hidden')) {
-            e.preventDefault();
-            console.log('=== SPACE KEY PRESSED - BYPASSING ===');
-            const selectedMood = moodSelect ? moodSelect.value || 'excited' : 'excited';
-            sessionStorage.setItem('userMood', selectedMood);
-            applyTheme(selectedMood);
-            moodPopup.classList.add('hidden');
-            showWelcomeMessage(selectedMood);
-        }
-    });
-
-    // Handle universe entry
-    if (enterButton) {
-        // Add multiple click handlers
-        enterButton.addEventListener('click', (e) => {
-            console.log('=== BUTTON CLICKED ===');
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const selectedMood = moodSelect ? moodSelect.value : 'excited';
-            console.log('Enter button clicked, mood:', selectedMood);
-            
-            // Always proceed regardless of mood selection
-            sessionStorage.setItem('userMood', selectedMood);
-            applyTheme(selectedMood);
-            
-            if (moodPopup) {
-                    moodPopup.style.animation = 'fadeOut 0.8s ease';
-                    setTimeout(() => {
-                        moodPopup.classList.add('hidden');
-                    }, 800);
-                }
-                
-                // Show personalized welcome message
-                showWelcomeMessage(selectedMood);
-            } else {
-                console.log('No mood selected, button should be disabled');
-            }
-        });
-    }
+    console.log('=== WEBSITE READY ===');
 });
 
 // Apply theme based on mood
@@ -974,16 +727,8 @@ document.querySelector('.event-horizon')?.addEventListener('click', () => {
     }, 2000);
 });
 
-// Add loading animation
-window.addEventListener('load', () => {
-    // Don't show body immediately if mood popup is visible
-    if (!sessionStorage.getItem('userMood')) {
-        document.body.style.opacity = '1';
-    }
-});
-
-// Initial body opacity
-document.body.style.opacity = '0';
+// Initial body opacity - website is immediately visible
+document.body.style.opacity = '1';
 document.body.style.transition = 'opacity 0.5s ease';
 
 // Interstellar Wormhole Scroll Effects

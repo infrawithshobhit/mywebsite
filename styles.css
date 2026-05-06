@@ -6,6 +6,16 @@
     text-decoration: none !important;
 }
 
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    overflow-x: hidden;
+    overscroll-behavior-y: none;
+}
+
 /* Force remove any strikethrough */
 body, body *, h1, h2, h3, h4, h5, h6, p, span, div, a, button {
     text-decoration: none !important;
@@ -29,6 +39,16 @@ body {
     text-decoration-line: none !important;
     text-decoration-style: none !important;
     text-decoration-color: transparent !important;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    overflow-x: hidden;
+    overscroll-behavior-y: none;
 }
 
 /* Mood Selection Popup - COMPLETELY REMOVED */
@@ -189,6 +209,8 @@ body.theme-energetic {
     visibility: visible !important;
     opacity: 1 !important;
     z-index: -5;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 /* Sun */
@@ -505,6 +527,8 @@ body.theme-energetic .blackhole-background {
     );
     animation: accretionSpin 8s linear infinite;
     filter: blur(2px);
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 .accretion-disk::before {
@@ -3134,6 +3158,8 @@ body.theme-energetic .blackhole-background {
     width: 300px;
     height: 300px;
     animation: blackholeSystemRotation 25s linear infinite;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 .blackhole-center {
@@ -3184,6 +3210,8 @@ body.theme-energetic .blackhole-background {
     );
     animation: accretionSpin 12s linear infinite;
     filter: blur(1px);
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 .accretion-disk::before {
@@ -5966,5 +5994,58 @@ body.theme-energetic .blackhole-background {
     .space-particles .particle { display: none; }
     .comet { display: none; }
     * { -webkit-overflow-scrolling: touch; }
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    overflow-x: hidden;
+    overscroll-behavior-y: none;
+}
     html { scroll-behavior: smooth; }
+}
+
+/* ============================================
+   AGGRESSIVE MOBILE PERFORMANCE OPTIMIZATIONS
+   ============================================ */
+@media (max-width: 768px) {
+    /* Kill ALL cosmic background animations on mobile */
+    .solar-system,
+    .sun, .sun-core, .sun-corona,
+    .planet, .moon,
+    .asteroid-belt, .asteroid,
+    .wormhole, .wormhole-entrance, .wormhole-tunnel, .wormhole-exit, .wormhole-energy, .wormhole-donut,
+    .blackhole-system, .blackhole-center, .accretion-disk, .event-horizon, .gravitational-lensing, .hawking-radiation,
+    .nebula, .cosmic-dust,
+    .comet, .comet-tail,
+    .space-particles, .particle {
+        animation: none !important;
+        display: none !important;
+    }
+
+    /* Keep stars but make them static */
+    .star { animation: none !important; opacity: 0.3; }
+
+    /* Reduce deep space opacity */
+    .cosmic-scene { opacity: 0.3; }
+    .deep-space { opacity: 0.5; }
+
+    /* GPU-accelerate the page scroll container */
+    body {
+        -webkit-overflow-scrolling: touch;
+        overflow-x: hidden;
+    }
+
+    /* Disable all fadeInUp animations on mobile - just show content */
+    [style*="animation"] { animation: none !important; opacity: 1 !important; }
+
+    /* Reduce page-level animations */
+    .hero-content, .about-content, .timeline-item,
+    .content-card, .skill-category, .vision-pillar {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
 }

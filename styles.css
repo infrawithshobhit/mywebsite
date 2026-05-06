@@ -2260,15 +2260,19 @@ body.theme-energetic .blackhole-background {
     background: rgba(255, 140, 0, 0.1);
     border: 1px solid rgba(255, 140, 0, 0.3);
     border-radius: 10px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #ffffff;
     transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 3rem;
 }
 
 .brand-item:hover {
-    background: rgba(228, 64, 95, 0.3);
-    color: #ffffff;
+    background: rgba(255, 140, 0, 0.25);
+    border-color: rgba(255, 140, 0, 0.6);
     transform: translateY(-2px);
+    color: #ffffff;
 }
 
 .brand-item i {
@@ -2277,7 +2281,7 @@ body.theme-energetic .blackhole-background {
 }
 
 .brand-item:hover i {
-    color: #ffffff;
+    color: #ffb347;
 }
 
 .content-card h3 {
@@ -2310,6 +2314,26 @@ body.theme-energetic .blackhole-background {
     color: white;
 }
 
+.youtube-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #cc0000;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.youtube-link:hover {
+    background: #ff0000;
+    transform: translateY(-2px);
+    color: white;
+}
+
 .social-stats {
     margin: 1.5rem 0;
     display: flex;
@@ -2319,30 +2343,54 @@ body.theme-energetic .blackhole-background {
 }
 
 .social-stats span {
-    background: #3498db;
-    color: white;
+    background: rgba(255, 140, 0, 0.1);
+    border: 1px solid rgba(255, 140, 0, 0.3);
+    color: #ffffff;
     padding: 0.5rem 1rem;
     border-radius: 20px;
     font-size: 0.9rem;
 }
 
 .content-topics {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
     margin-top: 1.5rem;
+    width: 100%;
 }
 
 .content-topics span {
-    display: inline-block;
-    background: #ecf0f1;
-    padding: 0.5rem 1rem;
-    margin: 0.2rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.8rem;
+    background: rgba(255, 140, 0, 0.1);
+    border: 1px solid rgba(255, 140, 0, 0.3);
+    border-radius: 10px;
+    font-size: 0.85rem;
+    color: #ffffff;
     transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+    word-break: break-word;
+    min-height: 3rem;
+}
+
+.content-topics span i {
+    color: #ff8c00;
+    font-size: 1.1rem;
+}
+
+.content-topics span:hover i {
+    color: #ffb347;
 }
 
 .content-topics span:hover {
-    background: #3498db;
-    color: white;
+    background: rgba(255, 140, 0, 0.25);
+    border-color: rgba(255, 140, 0, 0.6);
+    transform: translateY(-2px);
+    color: #ffffff;
 }
 
 .devrel-capabilities {
@@ -2360,13 +2408,28 @@ body.theme-energetic .blackhole-background {
     background: rgba(255, 140, 0, 0.1);
     border: 1px solid rgba(255, 140, 0, 0.3);
     border-radius: 10px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #ffffff;
+    transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 3rem;
 }
 
 .capability-item i {
-    color: #e74c3c;
+    color: #ff8c00;
     font-size: 1.1rem;
+}
+
+.capability-item:hover {
+    background: rgba(255, 140, 0, 0.25);
+    border-color: rgba(255, 140, 0, 0.6);
+    transform: translateY(-2px);
+    color: #ffffff;
+}
+
+.capability-item:hover i {
+    color: #ffb347;
 }
 
 .devrel-vision {
